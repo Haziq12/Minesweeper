@@ -4,10 +4,11 @@
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let isWinner = null
-let columns = 10
-let rows = 10
-let squares = []
+let isWinner
+let columns
+let rows
+let bombCount
+// let squares = []
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -22,17 +23,22 @@ const statusMessage = document.getElementById('message')
 
 /*-------------------------------- Functions --------------------------------*/
 
-newCells()
 
-function newCells() {
+init()
 
-  for(i = 0; i < (columns*rows); i++) {
+function init() {
 
-    let newCell = document.createElement('div')
-    newCell.setAttribute('id', i)
-    board.appendChild(newCell)
-    squares.push(newCell)
+  isWinner = null
+  columns = 10
+  rows = 10
 
+  function newCells() {
+    for(i = 0; i < (columns*rows); i++) {
+      let newCell = document.createElement('div')
+      newCell.setAttribute('id', i)
+      board.appendChild(newCell)
+      // squares.push(newCell)
+    }
   }
-
+  newCells()
 }
