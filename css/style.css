@@ -1,4 +1,27 @@
-h1 {
-  color: blue;
+h1, h3 {
+  color:red;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.board {
+  height: 400px;
+  width: 500px;
+  display: flex;
+  background-color: gray;
+}
+
+#cell {
+  height: 40px;
+  width: 40px;
+}
+
+#reset {
+  margin-top: 10px;
+}
