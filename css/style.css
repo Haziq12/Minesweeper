@@ -2,20 +2,22 @@ html {
   box-sizing: border-box;
 }
 
-
-
-
 body {
   background-color: aqua;
   min-height: 100vh;
   
 }
 
-
 .board {  
   height: 400px;
   width: 400px;
   display: flex;
   flex-wrap: wrap;
-  background-color: bisque;
+  background-color:antiquewhite;
+}
+
+.board > div {
+  height: 40px;
+  width: 40px;
+  background-color:blanchedalmond;
 }

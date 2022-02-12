@@ -5,7 +5,7 @@ const column_row = 10
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-
+let bombArray = []
 let numBomb = 20
 let numFlags = 0
 let isWinner = false
@@ -27,17 +27,26 @@ const resetButton = document.getElementById('reset')
 
 /*-------------------------------- Functions --------------------------------*/
 
-// creating board
 
-function createBoardCells() {
-  for(i = 0; i < column_row*column_row; i++) {
-    
 
+
+init()
+
+function init() {
+
+  // this loop populates an array with bombs
+  for(let i = 0; i < numBomb; i++) {
+    bombArray.push('bomb')
+  }
+  
+
+// this function creates the board with 10x10 cells
+  function createBoardCells() {
+    for (i = 0; i < column_row * column_row; i++) {
+      const newCell = document.createElement("div");
+      newCell.setAttribute("id", i);
+      boardCells.appendChild(newCell);
+    }
   }
 
-
-
-
-
-
-
+}
