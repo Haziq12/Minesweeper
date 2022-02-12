@@ -1,44 +1,43 @@
 /*-------------------------------- Constants --------------------------------*/
 
+const column_row = 10
 
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let isWinner
-let columns
-let rows
-let bombCount
-// let squares = []
+
+let numBomb = 20
+let numFlags = 0
+let isWinner = false
+
 
 
 /*------------------------ Cached Element References ------------------------*/
 
-const board = document.querySelector('.board')
+const boardCells = document.querySelector('.board')
 
 const statusMessage = document.getElementById('message')
+
+const resetButton = document.getElementById('reset')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 
 
+
 /*-------------------------------- Functions --------------------------------*/
 
+// creating board
 
-init()
+function createBoardCells() {
+  for(i = 0; i < column_row*column_row; i++) {
+    
 
-function init() {
-
-  isWinner = null
-  columns = 10
-  rows = 10
-
-  function newCells() {
-    for(i = 0; i < (columns*rows); i++) {
-      let newCell = document.createElement('div')
-      newCell.setAttribute('id', i)
-      board.appendChild(newCell)
-      // squares.push(newCell)
-    }
   }
-  newCells()
-}
+
+
+
+
+
+
+
