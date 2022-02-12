@@ -9,6 +9,7 @@ let bombArray = []
 let numBomb = 20
 let numFlags = 0
 let isWinner = false
+let cellsArray = []
 
 
 
@@ -39,8 +40,15 @@ function init() {
     bombArray.push('bomb')
   }
   
+  
+  // create array with number of cells without bombs
+  for(let i = 0; i < ( (column_row*column_row) - numBomb); i++) {
+    cellsArray.push('safe')
+  }
 
-// this function creates the board with 10x10 cells
+  // 
+
+  // this function creates the board with 10x10 cells
   function createBoardCells() {
     for (i = 0; i < column_row * column_row; i++) {
       const newCell = document.createElement("div");
@@ -48,5 +56,7 @@ function init() {
       boardCells.appendChild(newCell);
     }
   }
+
+  createBoardCells()
 
 }
