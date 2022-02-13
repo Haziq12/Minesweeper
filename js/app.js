@@ -60,6 +60,20 @@ function createBoardCells() {
     newCellArray.push(newCell) 
     newCell.addEventListener('click', handleClick)
   }
+  // for(i = 0; i < newCellArray.length; i++){
+    //   let bombTotal = 0
+    //   const leftEdge = (i % column === 0)
+    //   const rightEdge = (i % row === column_row - 1)
+    //   if(i > 0 && !leftEdge && newCellArray[i - 1].classList.contains('bomb')) bombTotal++
+    //   if(i > 9 && !rightEdge && newCellArray[i + 1 - column_row].classList.contains('bomb')) bombTotal++
+    //   if(i > 10 && newCellArray[i - column_row].classList.contains('bomb')) bombTotal++
+    //   if(i > 11 && !leftEdge && newCellArray[i - 1 - column_row].classList.contains('bomb')) bombTotal++
+    //   if(i < 98 && !leftEdge && newCellArray[i - 1].classList.contains('bomb')) bombTotal++
+    //   if(i < 90 && !leftEdge && newCellArray[i - 1 + column_row].classList.contains('bomb')) bombTotal++
+    //   if(i < 88 && !leftEdge && newCellArray[i + 1 + column_row].classList.contains('bomb')) bombTotal++
+    //   if(i < 89 && newCellArray[i + column_row].classList.contains('bomb')) bombTotal++
+    //   newCellArray[i].setAttribute('data', bombTotal)
+    // }
     
   }
   createBoardCells()
@@ -68,7 +82,11 @@ function createBoardCells() {
 
 function handleClick(evt) {
   if(evt.target.className === 'bomb') {
-  console.log('bomb clicked') }
+  console.log('bomb clicked') 
+  } else {
+    let total = evt.target.id
+    console.log(total)
+  }
 }
 
 
