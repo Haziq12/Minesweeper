@@ -76,7 +76,7 @@ function createBoardCells() {
       if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
       if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
       if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
-      newCellArray[i].setAttribute('data', bombTotal)
+      newCellArray[i].setAttribute('bombTotal', bombTotal)
     }
    }
   }
@@ -87,10 +87,15 @@ function createBoardCells() {
 
 function handleClick(newCellArray) {
   if(newCellArray.target.className === 'bomb') {
-  console.log('bomb clicked') 
+  newCellArray.target.innerText='bomb'
+  console.log('bomb clicked')
   } else {
-    let total = newCellArray.target.getAttribute('data')
-    console.log(total)
+    let adjBombs = newCellArray.target.getAttribute('bombTotal')
+    console.log(adjBombs)
+    if(adjBombs != 0) {
+      if(adjBombs === 1) newCellArray.target.classList.add('one')
+      console.log(newCellArray.target)
+    }
   }
 }
 
