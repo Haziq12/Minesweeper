@@ -64,15 +64,17 @@ function createBoardCells() {
   for(i = 0; i < newCellArray.length; i++){
       let bombTotal = 0
       const leftEdge = (i % row === 0)
+      
       const rightEdge = (i % row === row - 1)
+      
     if (newCellArray[i].className === 'safe') {
-      if (i > 0 && !leftEdge && newCellArray[i - 1].className === 'bomb') bombTotal++
-      if (i > 9 && !rightEdge && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
+      if (i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
+      if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
       if (i > 10 && newCellArray[i - row].className === 'bomb') bombTotal++
-      if (i > 11 && !leftEdge && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
-      if (i < 98 && !rightEdge && newCellArray[i + 1].className === 'bomb') bombTotal++
-      if (i < 90 && !leftEdge && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
-      if (i < 88 && !rightEdge && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
+      if (i > 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
+      if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
+      if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
+      if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
       if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
       newCellArray[i].setAttribute('data', bombTotal)
     }
