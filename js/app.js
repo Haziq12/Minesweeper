@@ -1,6 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
-const column_row = 10
+let column = 10
+let row = 10
 
 /*---------------------------- Variables (state) ----------------------------*/
 
@@ -10,6 +11,7 @@ let bombArray = []
 let numBomb = 20
 let numFlags = 0
 let isWinner = false
+let newCellArray = []
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -31,14 +33,14 @@ init()
 
 function init() {
 
-  // this loop populates an array with bombs
-  for(let i = 0; i < numBomb; i++) {
+   // this loop populates an array with bombs
+   for(let i = 0; i < numBomb; i++) {
     bombArray.push('bomb')
   }
   
   
   // create array with number of cells without bombs
-  for(let i = 0; i < ( (column_row*column_row) - numBomb); i++) {
+  for(let i = 0; i < ( (column*row) - numBomb); i++) {
     nonBombArray.push('safe')
   }
 
@@ -46,29 +48,37 @@ function init() {
   // find out how to radomize array contents 
   boardArray = nonBombArray.concat(bombArray)
   let randBoardArray = boardArray.sort(() => Math.random() - 0.5)
-  console.log(randBoardArray)
-  
-  
+
   // this function creates the board with 10x10 cells
-  function createBoardCells() {
-    for (i = 0; i < column_row * column_row; i++) {
-      const newCell = document.createElement("div");
-      newCell.setAttribute("id", i);
-      boardCells.appendChild(newCell);
-    }
+function createBoardCells() {
+
+  for (i = 0; i < column * row; i++) {
+    const newCell = document.createElement("div")
+    newCell.setAttribute("id", i);
+    newCell.classList.add(randBoardArray[i])
+    boardCells.appendChild(newCell);
+    newCellArray.push(newCell) 
+    newCell.addEventListener('click', handleClick)
   }
-
+    
+  }
   createBoardCells()
+}
+  
 
+function handleClick(evt) {
+  if(evt.target.className === 'bomb') {
+  console.log('bomb clicked') }
 }
 
 
-
+// Get class name on object
+// console.log(newCell.className)
 
 
 // ! DID NOT WORK 
 // function randomArray() {
-//   let currentIndex = boardArray.length
+//   let currentIndex = boardArray.length - 1
 //   let randBoardArray = []
 //   console.log(randBoardArray[2])
 //   while(currentIndex != 0) {
