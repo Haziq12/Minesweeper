@@ -8,9 +8,9 @@ let row = 10
 let boardArray = []
 let nonBombArray = []
 let bombArray = []
-let numBomb = 20
+let numBomb = 25
 let numFlags = 0
-let isWinner = false
+let isWinner = null
 let newCellArray = []
 
 
@@ -59,6 +59,11 @@ function createBoardCells() {
     boardCells.appendChild(newCell);
     newCellArray.push(newCell) 
     newCell.addEventListener('click', handleClick)
+    newCell.addEventListener('contextmenu', function(newCellArray) {
+      newCellArray.preventDefault()
+      newCellArray.target.classList.add('flag')
+      newCellArray.target.innerHTML = 'Flag'
+    })
   }
 
   for(i = 0; i < newCellArray.length; i++){
@@ -83,12 +88,11 @@ function createBoardCells() {
   createBoardCells()
 }
 
-console.log(newCellArray[0])
-  
-
 function handleClick(newCellArray) {
+  if(isWinner == false) return
   if (newCellArray.target.className === 'bomb') {
     newCellArray.target.innerText = 'bomb'
+    isWinner = false
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
     if (adjBombs >= 0) {
@@ -124,7 +128,6 @@ function handleClick(newCellArray) {
     }
   }
 }
-
 
 
 
