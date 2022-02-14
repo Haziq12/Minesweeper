@@ -8,9 +8,9 @@ let row = 10
 let boardArray = []
 let nonBombArray = []
 let bombArray = []
-let numBomb = 25
-let numFlags = 0
-let isWinner = null
+let numBomb
+let numFlags
+let isWinner
 let newCellArray = []
 
 
@@ -33,6 +33,11 @@ init()
 
 function init() {
 
+  isWinner = null
+  numBomb = 25
+  numFlags = numBomb
+
+
    // this loop populates an array with bombs
    for(let i = 0; i < numBomb; i++) {
     bombArray.push('bomb')
@@ -49,29 +54,27 @@ function init() {
   boardArray = nonBombArray.concat(bombArray)
   let randBoardArray = boardArray.sort(() => Math.random() - 0.5)
 
-  // this function creates the board with 10x10 cells
-function createBoardCells() {
+  createBoardCells(randBoardArray)
+}
+
+// this function creates the board with 10x10 cells
+function createBoardCells(randBoardArray) {
 
   for (i = 0; i < column * row; i++) {
     const newCell = document.createElement("div")
     newCell.setAttribute("id", i);
     newCell.classList.add(randBoardArray[i])
     boardCells.appendChild(newCell);
-    newCellArray.push(newCell) 
+    newCellArray.push(newCell)
     newCell.addEventListener('click', handleClick)
-    newCell.addEventListener('contextmenu', function(newCellArray) {
-      newCellArray.preventDefault()
-      newCellArray.target.classList.add('flag')
-      newCellArray.target.innerHTML = 'Flag'
-    })
+    newCell.addEventListener('contextmenu', rightClick) 
   }
 
-  for(i = 0; i < newCellArray.length; i++){
-      let bombTotal = 0
-      const leftEdge = (i % row === 0)
-      
-      const rightEdge = (i % row === row - 1)
-      
+  for (i = 0; i < newCellArray.length; i++) {
+    let bombTotal = 0
+    const leftEdge = (i % row === 0)
+    const rightEdge = (i % row === row - 1)
+
     if (newCellArray[i].className === 'safe') {
       if (i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
       if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
@@ -83,20 +86,20 @@ function createBoardCells() {
       if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
       newCellArray[i].setAttribute('bombTotal', bombTotal)
     }
-   }
   }
-  createBoardCells()
 }
 
 function handleClick(newCellArray) {
+  let index = newCellArray.target.id
+  console.log(index)
   if(isWinner == false) return
+  if(newCellArray.target.className == 'flag') return
   if (newCellArray.target.className === 'bomb') {
     newCellArray.target.innerText = 'bomb'
     isWinner = false
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
-    if (adjBombs >= 0) {
-      newCellArray.target.classList.add('checked')
+    if (adjBombs > 0) {
       if (adjBombs == 0) {
         newCellArray.target.classList.add('zero')
       }
@@ -126,13 +129,39 @@ function handleClick(newCellArray) {
       }
       newCellArray.target.innerHTML = adjBombs
     }
+    checkClickedCell(newCellArray, index)
+  }
+  newCellArray.target.classList.add('clicked')
+  console.log(newCellArray.target.classList)
+}
+
+function rightClick(newCellArray) {
+  if (isWinner == false) return
+  if (newCellArray.target.className == 'clicked' && newCellArray.target.className == 'flag') {
+    newCellArray.preventDefault()
+    newCellArray.target.className.remove('flag')
+    newCellArray.target.innerHTML = ''
+  } else if (newCellArray.target.className == 'clicked') {
+    return
+  }
+  else if (newCellArray.target.className !== 'clicked' && newCellArray.target.className !== 'flag') {
+    newCellArray.preventDefault()
+    newCellArray.target.classList.add('flag')
+    newCellArray.target.innerHTML = 'flag'
+    newCellArray.target.classList.add('clicked')
+    console.log(newCellArray.target.classList)
   }
 }
 
 
-
-
-
+function checkClickedCell(newCellArray, index) {
+  const leftEdge = (index % column === 0)
+  const rightEdge = (index % column === column -1)
+  if(index > 0 && leftEdge == false) {
+    const newIndex = newCellArray[parseInt(index) - 1].id
+    const newCell = 
+  }
+}
 
 
 
