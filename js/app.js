@@ -1,10 +1,9 @@
 /*-------------------------------- Constants --------------------------------*/
 
-let column = 10
-let row = 10
-
 /*---------------------------- Variables (state) ----------------------------*/
 
+let column
+let row
 let boardArray = []
 let nonBombArray = []
 let bombArray = []
@@ -33,16 +32,16 @@ init()
 
 function init() {
 
+  column = 10
+  row = 10
   isWinner = null
   numBomb = 25
   numFlags = numBomb
-
 
    // this loop populates an array with bombs
    for(let i = 0; i < numBomb; i++) {
     bombArray.push('bomb')
   }
-  
   
   // create array with number of cells without bombs
   for(let i = 0; i < ( (column*row) - numBomb); i++) {
@@ -95,7 +94,7 @@ function handleClick(newCellArray) {
   if(isWinner == false) return
   if(newCellArray.target.className == 'flag') return
   if (newCellArray.target.className === 'bomb') {
-    newCellArray.target.innerText = 'bomb'
+    newCellArray.target.innerText = '💣'
     isWinner = false
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
@@ -158,8 +157,9 @@ function checkClickedCell(newCellArray, index) {
   const leftEdge = (index % column === 0)
   const rightEdge = (index % column === column -1)
   if(index > 0 && leftEdge == false) {
-    const newIndex = newCellArray[parseInt(index) - 1].id
-    const newCell = 
+    const newIndex = (newCellArray[(index) - 1]).target.id
+    const newCell = document.getElementById(newIndex)
+    handleClick(newCell)
   }
 }
 
