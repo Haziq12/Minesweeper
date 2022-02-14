@@ -79,10 +79,10 @@ function createBoardCells(randBoardArray) {
       if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
       if (i > 10 && newCellArray[i - row].className === 'bomb') bombTotal++
       if (i > 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
-      if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
-      if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
       if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
       if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
+      if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
+      if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
       newCellArray[i].setAttribute('bombTotal', bombTotal)
     }
   }
@@ -92,17 +92,16 @@ function handleClick(newCellArray, newCell) {
   let index = (newCellArray.target.id)
   // console.log(typeof(index), index)
   // console.log(newCellArray.target.id)
-  if(isWinner == false) return
   if(newCellArray.target.className == 'flag') return
-  if (newCellArray.target.className === 'bomb') {
-    newCellArray.target.innerText = '💣'
-    isWinner = false
+  if(isWinner == false) return
+  if (newCellArray.target.classList.contains('bomb')) {
+    renderAllBombs()
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
     if (adjBombs == 0) {
       newCellArray.target.classList.add('zero')
       newCellArray.target.classList.add('clicked-zero')
-      checkClickedCell(newCellArray, index)
+      // checkClickedCell(newCellArray, index)
     }
     if (adjBombs > 0) {
       newCellArray.target.classList.add('clicked')
@@ -133,7 +132,7 @@ function handleClick(newCellArray, newCell) {
       newCellArray.target.innerHTML = adjBombs
     }
   }
-  console.log(newCellArray.target.classList)
+  // console.log(newCellArray.target.classList)
 }
 
 function rightClick(newCellArray) {
@@ -145,7 +144,7 @@ function rightClick(newCellArray) {
   } else if (newCellArray.target.className == 'clicked') {
     return
   }
-  else if (newCellArray.target.className !== 'clicked' && newCellArray.target.className !== 'flag') {
+  else if (newCellArray.target.className !== 'clicked' && newCellArray.target.className !== 'flag' && newCellArray.target.className != 'bomb') {
     newCellArray.preventDefault()
     newCellArray.target.classList.add('flag')
     newCellArray.target.innerHTML = 'flag'
@@ -155,65 +154,91 @@ function rightClick(newCellArray) {
 }
 
 
-function checkClickedCell(newCellArray, index) {
-  const leftEdge = (index % column === 0)
-  const rightEdge = (index % column === column -1)
-  
-  setTimeout(() => {
-    if(index > 0 && leftEdge == false) {
-      const newIndex = newCellArray[index-1].id 
-      const newCell = document.getElementById(newIndex)
-      handleClick(newCell)
-    }
-    if(index > 9 && rightEdge == false) {
-      const newIndex = newCellArray[parseInt(index)].target.id + 1 - column
-      const newCell = document.getElementById(newIndex)
-      handleClick(newCell)
-    }
-    if(index > 10) {
-      const newIndex = newCellArray[parseInt(index)].target.id - column
-      const newCell = document.getElementById(newIndex)
-      handleClick(newCell)
-    }
-    if(index > 11 && leftEdge == false) {
-      const newIndex = newCellArray[parseInt(index)].target.id - 1 - column
-      const newCell = document.getElementById(newIndex)
-      handleClick(newCell)
-    }
-    if(index < 98 && rightEdge == false) {
-      const newIndex = newCellArray[parseInt(index)].target.id + 1
-      const newCell = document.getElementById(newIndex)
-      handleClick(newCell)
-    }
-    if(index < 90 && leftEdge == false) {
-      const newIndex = newCellArray[parseInt(index)].target.id - 1 + column
-      const newCell = document.getElementById(newIndex)
-      handleClick(newCell)
-    }
-    if(index < 88 && rightEdge == false) {
-      const newIndex = newCellArray[parseInt(index)].target.id + 1 + column
-      const newCell = document.getElementById(newIndex)
-      handleClick(newCell)
-    }
-    if(index < 89) {
-      const newIndex = newCellArray[parseInt(index)].target.id + column
-      const newCell = document.getElementById(newIndex)
-      handleClick(newCell)
-    }
-  }, 10)
 
+function renderAllBombs() {
+  isWinner = false
+  newCellArray.forEach(element => {
+    if(element.classList == 'bomb') {
+    element.innerHTML = '💣'
+    }
+  })
 }
+
+
+
+// function gameOver(newCellArray) {
+//   isWinner = false
+//   console.log('Game over')
+//   newCellArray.forEach(element => {
+//     if(element.classList == 'bomb') {
+//       element.innerHTML = '💣'
+//     }
+//   });
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ! Attempt at recursion to cascade open empty mine positions not working
+// function checkClickedCell(newCellArray, index) {
+//   const leftEdge = (parseInt(index) % column === 0)
+//   const rightEdge = (parseInt(index) % column === column -1)
   
+//   setTimeout(() => {
+//     if(index > 0 && leftEdge == false) {
+//       const newIndex = newCellArray[index-1].id 
+//       const newCell = document.getElementById(newIndex)
+//       handleClick(newCell)
+//     }
+//     if(index > 9 && rightEdge == false) {
+//       const newIndex = newCellArray[parseInt(index)].target.id + 1 - column
+//       const newCell = document.getElementById(newIndex)
+//       handleClick(newCell)
+//     }
+//     if(index > 10) {
+//       const newIndex = newCellArray[parseInt(index)].target.id - column
+//       const newCell = document.getElementById(newIndex)
+//       handleClick(newCell)
+//     }
+//     if(index > 11 && leftEdge == false) {
+//       const newIndex = newCellArray[parseInt(index)].target.id - 1 - column
+//       const newCell = document.getElementById(newIndex)
+//       handleClick(newCell)
+//     }
+//     if(index < 98 && rightEdge == false) {
+//       const newIndex = newCellArray[parseInt(index)].target.id + 1
+//       const newCell = document.getElementById(newIndex)
+//       handleClick(newCell)
+//     }
+//     if(index < 90 && leftEdge == false) {
+//       const newIndex = newCellArray[parseInt(index)].target.id - 1 + column
+//       const newCell = document.getElementById(newIndex)
+//       handleClick(newCell)
+//     }
+//     if(index < 88 && rightEdge == false) {
+//       const newIndex = newCellArray[parseInt(index)].target.id + 1 + column
+//       const newCell = document.getElementById(newIndex)
+//       handleClick(newCell)
+//     }
+//     if(index < 89) {
+//       const newIndex = newCellArray[parseInt(index)].target.id + column
+//       const newCell = document.getElementById(newIndex)
+//       handleClick(newCell)
+//     }
+//   }, 10)
 
-
-
-
+// }
   
-
-
-
-
-
 
 // Get class name on object
 // console.log(newCell.className)
