@@ -28,3 +28,7 @@ body {
 .bomb {
   background-color:coral;
 }
+
+.checked {
+  background-color: aqua;
+}

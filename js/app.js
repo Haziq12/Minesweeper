@@ -89,15 +89,38 @@ console.log(newCellArray[0])
 function handleClick(newCellArray) {
   if (newCellArray.target.className === 'bomb') {
     newCellArray.target.innerText = 'bomb'
-    console.log('bomb clicked')
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
-    console.log(adjBombs)
-    if (adjBombs == 1) {
-      newCellArray.target.classList.add('one')
-      console.log(newCellArray.target)
-      // if (adjBombs === 1) {
-      // } 
+    if (adjBombs >= 0) {
+      newCellArray.target.classList.add('checked')
+      if (adjBombs == 0) {
+        newCellArray.target.classList.add('zero')
+      }
+      if (adjBombs == 1) {
+        newCellArray.target.classList.add('one')       
+      }
+      if (adjBombs == 2) {
+        newCellArray.target.classList.add('two')      
+      }
+      if (adjBombs == 3) {
+        newCellArray.target.classList.add('three')
+      }
+      if (adjBombs == 4) {
+        newCellArray.target.classList.add('four')
+      }
+      if (adjBombs == 5) {
+        newCellArray.target.classList.add('five')
+      }
+      if (adjBombs == 6) {
+        newCellArray.target.classList.add('six')
+      }
+      if (adjBombs == 7) {
+        newCellArray.target.classList.add('seven')
+      }
+      if (adjBombs == 8) {
+        newCellArray.target.classList.add('eight')
+      }
+      newCellArray.target.innerHTML = adjBombs
     }
   }
 }
