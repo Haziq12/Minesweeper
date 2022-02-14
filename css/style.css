@@ -29,6 +29,10 @@ body {
   background-color:coral;
 }
 
-/* .clicked {
+.clicked {
   background-color: aqua;
-} */
+}
+
+.clicked-zero {
+  background-color: khaki;
+}

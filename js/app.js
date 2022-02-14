@@ -88,9 +88,10 @@ function createBoardCells(randBoardArray) {
   }
 }
 
-function handleClick(newCellArray) {
-  let index = newCellArray.target.id
-  console.log(index)
+function handleClick(newCellArray, newCell) {
+  let index = (newCellArray.target.id)
+  // console.log(typeof(index), index)
+  // console.log(newCellArray.target.id)
   if(isWinner == false) return
   if(newCellArray.target.className == 'flag') return
   if (newCellArray.target.className === 'bomb') {
@@ -98,10 +99,13 @@ function handleClick(newCellArray) {
     isWinner = false
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
+    if (adjBombs == 0) {
+      newCellArray.target.classList.add('zero')
+      newCellArray.target.classList.add('clicked-zero')
+      checkClickedCell(newCellArray, index)
+    }
     if (adjBombs > 0) {
-      if (adjBombs == 0) {
-        newCellArray.target.classList.add('zero')
-      }
+      newCellArray.target.classList.add('clicked')
       if (adjBombs == 1) {
         newCellArray.target.classList.add('one')       
       }
@@ -128,9 +132,7 @@ function handleClick(newCellArray) {
       }
       newCellArray.target.innerHTML = adjBombs
     }
-    checkClickedCell(newCellArray, index)
   }
-  newCellArray.target.classList.add('clicked')
   console.log(newCellArray.target.classList)
 }
 
@@ -148,7 +150,7 @@ function rightClick(newCellArray) {
     newCellArray.target.classList.add('flag')
     newCellArray.target.innerHTML = 'flag'
     newCellArray.target.classList.add('clicked')
-    console.log(newCellArray.target.classList)
+    // console.log(newCellArray.target.classList)
   }
 }
 
@@ -156,12 +158,58 @@ function rightClick(newCellArray) {
 function checkClickedCell(newCellArray, index) {
   const leftEdge = (index % column === 0)
   const rightEdge = (index % column === column -1)
-  if(index > 0 && leftEdge == false) {
-    const newIndex = (newCellArray[(index) - 1]).target.id
-    const newCell = document.getElementById(newIndex)
-    handleClick(newCell)
-  }
+  
+  setTimeout(() => {
+    if(index > 0 && leftEdge == false) {
+      const newIndex = newCellArray[index-1].id 
+      const newCell = document.getElementById(newIndex)
+      handleClick(newCell)
+    }
+    if(index > 9 && rightEdge == false) {
+      const newIndex = newCellArray[parseInt(index)].target.id + 1 - column
+      const newCell = document.getElementById(newIndex)
+      handleClick(newCell)
+    }
+    if(index > 10) {
+      const newIndex = newCellArray[parseInt(index)].target.id - column
+      const newCell = document.getElementById(newIndex)
+      handleClick(newCell)
+    }
+    if(index > 11 && leftEdge == false) {
+      const newIndex = newCellArray[parseInt(index)].target.id - 1 - column
+      const newCell = document.getElementById(newIndex)
+      handleClick(newCell)
+    }
+    if(index < 98 && rightEdge == false) {
+      const newIndex = newCellArray[parseInt(index)].target.id + 1
+      const newCell = document.getElementById(newIndex)
+      handleClick(newCell)
+    }
+    if(index < 90 && leftEdge == false) {
+      const newIndex = newCellArray[parseInt(index)].target.id - 1 + column
+      const newCell = document.getElementById(newIndex)
+      handleClick(newCell)
+    }
+    if(index < 88 && rightEdge == false) {
+      const newIndex = newCellArray[parseInt(index)].target.id + 1 + column
+      const newCell = document.getElementById(newIndex)
+      handleClick(newCell)
+    }
+    if(index < 89) {
+      const newIndex = newCellArray[parseInt(index)].target.id + column
+      const newCell = document.getElementById(newIndex)
+      handleClick(newCell)
+    }
+  }, 10)
+
 }
+  
+
+
+
+
+  
+
 
 
 
