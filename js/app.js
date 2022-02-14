@@ -83,21 +83,28 @@ function createBoardCells() {
   createBoardCells()
 }
 
+console.log(newCellArray[0])
   
 
 function handleClick(newCellArray) {
-  if(newCellArray.target.className === 'bomb') {
-  newCellArray.target.innerText='bomb'
-  console.log('bomb clicked')
+  if (newCellArray.target.className === 'bomb') {
+    newCellArray.target.innerText = 'bomb'
+    console.log('bomb clicked')
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
     console.log(adjBombs)
-    if(adjBombs != 0) {
-      if(adjBombs === 1) newCellArray.target.classList.add('one')
+    if (adjBombs == 1) {
+      newCellArray.target.classList.add('one')
       console.log(newCellArray.target)
+      // if (adjBombs === 1) {
+      // } 
     }
   }
 }
+
+
+
+
 
 
 
