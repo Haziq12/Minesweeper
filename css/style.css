@@ -27,7 +27,7 @@ body {
 
 .bomb {
   background-color:coral;
-  text-align: center;
+  
 }
 
 .clicked {
@@ -36,5 +36,10 @@ body {
 
 .clicked-zero {
   background-color: khaki;
+}
+
+.flag {
+  text-align: center;
+  background-color:chocolate;
 }
 

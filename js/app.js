@@ -1,5 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
+
+
 /*---------------------------- Variables (state) ----------------------------*/
 
 let column
@@ -35,7 +37,7 @@ function init() {
   column = 10
   row = 10
   isWinner = null
-  numBomb = 2
+  numBomb = 20
   numFlags = numBomb
 
    // this loop populates an array with bombs
@@ -75,13 +77,21 @@ function createBoardCells(randBoardArray) {
     const rightEdge = (i % row === row - 1)
 
     if (newCellArray[i].className === 'safe') {
+      // bomb to the left
       if (i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
+      // top right corner bomb
       if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
+      // bomb to the top 
       if (i > 10 && newCellArray[i - row].className === 'bomb') bombTotal++
+      // bomb to top left corner 
       if (i > 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
+      // bomb to bottom right corner
       if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
+      // bomb directly underneath
       if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
+      // bomb to the bottom left corner
       if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
+      // bomb to the right
       if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
       newCellArray[i].setAttribute('bombTotal', bombTotal)
     }
@@ -89,22 +99,22 @@ function createBoardCells(randBoardArray) {
 }
 
 function handleClick(newCellArray, newCell) {
-  // let index = (newCellArray.target.id)
+  newCellArray.target.classList.add('clicked')
+  let index = (newCellArray.target.id)
   // console.log(typeof(index), index)
   // console.log(newCellArray.target.id)
   // if(newCellArray.target.className == 'flag') return
   if(isWinner == false) return
+  if(isWinner == true) return
   if (newCellArray.target.classList.contains('bomb')) {
     renderAllBombs()
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
     if (adjBombs == 0) {
-      newCellArray.target.classList.add('zero')
-      newCellArray.target.classList.add('clicked-zero')
-      cascadeEmptyCells(newCellArray)
+      // console.log(adjBombs)
+      cascadeEmptyCells()
     }
     if (adjBombs > 0) {
-      newCellArray.target.classList.add('clicked')
       if (adjBombs == 1) {
         newCellArray.target.classList.add('one')       
       }
@@ -135,19 +145,28 @@ function handleClick(newCellArray, newCell) {
   hasWon()
 }
 
+
+
 function rightClick(newCellArray) {
   if (isWinner == false) return
-  if (newCellArray.target.className == 'bomb' && newCellArray.target.className == 'flag') {
+  if (newCellArray.target.classList.contains('flag')) {
     newCellArray.preventDefault()
-    newCellArray.target.className.remove('flag')
+    newCellArray.target.classList.remove('flag')
     numFlags++
-    newCellArray.target.innerHTML = ''
-  } else if (newCellArray.target.className == 'clicked') {
+    if(newCellArray.target.classList.contains('bomb')) {
+      newCellArray.target.classList.remove('clicked')
+      newCellArray.target.innerHTML = ' '
+    } else if(newCellArray.target.classList.contains('safe')) {
+      newCellArray.target.classList.remove('clicked')
+      newCellArray.target.innerHTML = ' '
+    }
+  } else if (newCellArray.target.classList.contains('clicked')) {
     return
   }
   else if (newCellArray.target.className !== 'clicked' && newCellArray.target.className !== 'flag') {
     newCellArray.preventDefault()
     newCellArray.target.classList.add('flag')
+    console.log(newCellArray.target.classList.contains('flag'))
     numFlags--
     newCellArray.target.innerHTML = '🚩'
     newCellArray.target.classList.add('clicked')
@@ -159,18 +178,33 @@ function renderAllBombs() {
   isWinner = false
   newCellArray.forEach(element => {
     if(element.classList == 'bomb') {
-    element.innerHTML = '💣'
+    element.innerHTML = '💣 '
     }
   })
 }
 
-function cascadeEmptyCells(newCellArray) {
-  const leftEdge = (i % row === 0)
-  const rightEdge = (i % row === row - 1)
+// function cascadeEmptyCells() {
+//   const leftEdge = (i % row === 0)
+//   const rightEdge = (i % row === row - 1)
+//   console.log(newCellArray)
+//   console.log('hi')
+//   for (let i = 0; i < newCellArray.length; i++) {
+//     console.log('BEFORE ADD CLASS', newCellArray[i])
+//     newCellArray[i].classList.add('zero')
+//     newCellArray[i].classList.add('clicked-zero')
+//     console.log(newCellArray[i], 'AFTER ADD CLASS')
+    // console.log(newCellArray.classList)
+    // render()
+//     if (newCellArray[i].classList.contains('safe')) {
+//       if(i < 89 && newCellArray[i + row].className === 'safe') cascadeEmptyCells(newCellArray)
+//     }
+//   }
+// }
 
-  
-  
-}
+// function render() {
+//   newCellArray
+//   if(newCellArray.classList.contains('safe') = 'safe')
+// }
 
 
 function hasWon() {
@@ -183,6 +217,7 @@ function hasWon() {
     isWinner = true
     console.log('win')
   }
+  return isWinner
 }
 
 
