@@ -81,29 +81,29 @@ function populateNums() {
     const rightEdge = (i % row === row - 1)
     if (newCellArray[i].className === 'safe') {
       // bomb to the left
-      if (i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
+      if(i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
       // bomb to the right
-      if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
+      if(i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
       // top right corner bomb
-      if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
+      if(i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
       // bomb to top left corner 
-      if (i >= 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
+      if(i >= 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
       // bomb to the top 
-      if (i >= 10 && newCellArray[i - row].className === 'bomb') bombTotal++
+      if(i >= 10 && newCellArray[i - row].className === 'bomb') bombTotal++
       // bomb directly underneath
-      if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
+      if(i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
       // bomb to bottom right corner
-      if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
+      if(i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
       // bomb to the bottom left corner
-      if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
+      if(i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
       newCellArray[i].setAttribute('bombTotal', bombTotal)
     }
   }
 }
 
 function handleClick(newCellArray, newCell) {
-  // let index = parseInt(newCellArray.target.id)
-  // console.log(typeof(index), index)
+  let index = parseInt(newCellArray.target.id)
+  console.log(typeof(index), index)
   // console.log(newCellArray.target.id)
   // if(newCellArray.target.className == 'flag') return
   if(isWinner == false) return
@@ -113,9 +113,8 @@ function handleClick(newCellArray, newCell) {
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
     if (adjBombs == 0) {
-      // console.log(adjBombs)
-      newCellArray.target.classList.add('clicked')
-      // cascadeEmptyCells(newCellArray, index)
+      // newCellArray.target.classList.add('clicked')
+      cascadeEmptyCells(newCellArray.target, index)
     }
     if (adjBombs > 0) {
       newCellArray.target.classList.add('clicked')
@@ -211,22 +210,78 @@ function hasWon() {
 
 
 
-// function cascadeEmptyCells() {
-//   const leftEdge = (i % row === 0)
-//   const rightEdge = (i % row === row - 1)
-//   console.log(newCellArray)
-//   console.log('hi')
-//   for (let i = 0; i < newCellArray.length; i++) {
-//     console.log('BEFORE ADD CLASS', newCellArray[i])
-//     newCellArray[i].classList.add('zero')
-//     newCellArray[i].classList.add('clicked-zero')
-//     console.log(newCellArray[i], 'AFTER ADD CLASS')
-//     console.log(newCellArray.classList)
-//     if (newCellArray[i].classList.contains('safe')) {
-//       if(i < 89 && newCellArray[i + row].className === 'safe') cascadeEmptyCells(newCellArray)
-//     }
-//   }
-// }
+function cascadeEmptyCells(cell, i) {
+  if(cell.classList.contains('clicked')) return
+  cell.classList.add('clicked')
+  console.log(cell)
+  console.log(i)
+  const leftEdge = (i % row === 0)
+  const rightEdge = (i % row === row - 1)
+  const neighborCells = []
+  // bomb to the left
+  if(i > 0 && leftEdge === false ) neighborCells.push(newCellArray[i - 1])
+  // bomb to the right
+  if(i < 98 && rightEdge === false) neighborCells.push(newCellArray[i + 1])
+  // top right corner bomb
+  if(i > 9 && rightEdge === false) neighborCells.push(newCellArray[i + 1 - row])
+  // bomb to top left corner 
+  if(i >= 11 && leftEdge === false) neighborCells.push(newCellArray[i - 1 - row])
+  // bomb to the top 
+  if(i >= 10) neighborCells.push(newCellArray[i - row])
+  // bomb directly underneath
+  if(i < 89) neighborCells.push(newCellArray[i + row])
+  // bomb to bottom right corner
+  if(i < 88 && rightEdge === false) neighborCells.push(newCellArray[i + 1 + row])
+  // bomb to the bottom left corner
+  if(i < 90 && leftEdge === false) neighborCells.push(newCellArray[i - 1 + row])
+  console.log(neighborCells)
+  neighborCells.forEach(neighborCell => {
+    const bombTotal = neighborCell.getAttribute('bombtotal')
+    console.log(parseInt(neighborCell.id))
+    if(bombTotal === '0') {
+      cascadeEmptyCells(neighborCell, parseInt(neighborCell.id))
+    } else {
+        neighborCell.classList.add('clicked')
+        if (bombTotal == 1) {
+          neighborCell.classList.add('one')       
+        }
+        if (bombTotal == 2) {
+          neighborCell.classList.add('two')      
+        }
+        if (bombTotal == 3) {
+          neighborCell.classList.add('three')
+        }
+        if (bombTotal == 4) {
+          neighborCell.classList.add('four')
+        }
+        if (bombTotal == 5) {
+          neighborCell.classList.add('five')
+        }
+        if (bombTotal == 6) {
+          neighborCell.classList.add('six')
+        }
+        if (bombTotal == 7) {
+          neighborCell.classList.add('seven')
+        }
+        if (bombTotal == 8) {
+          neighborCell.classList.add('eight')
+        }
+        neighborCell.innerHTML = bombTotal
+      }
+  })
+
+  // console.log('hi')
+  // for (let i = 0; i < newCellArray.length; i++) {
+  //   console.log('BEFORE ADD CLASS', newCellArray[i])
+  //   newCellArray[i].classList.add('zero')
+  //   newCellArray[i].classList.add('clicked-zero')
+  //   console.log(newCellArray[i], 'AFTER ADD CLASS')
+  //   console.log(newCellArray.classList)
+  //   if (newCellArray[i].classList.contains('safe')) {
+  //     if(i < 89 && newCellArray[i + row].className === 'safe') cascadeEmptyCells(newCellArray)
+  //   }
+  // }
+}
 
 
 
