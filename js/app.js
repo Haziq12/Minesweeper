@@ -62,7 +62,6 @@ function init() {
 
 // this function creates the board with 10x10 cells
 function createBoardCells(randBoardArray) {
-
   for (i = 0; i < column * row; i++) {
     const newCell = document.createElement("div")
     newCell.setAttribute("id", i);
@@ -72,30 +71,33 @@ function createBoardCells(randBoardArray) {
     newCell.addEventListener('click', handleClick)
     newCell.addEventListener('contextmenu', rightClick) 
   }
+  populateNums()
+}
 
-  for (i = 0; i < newCellArray.length; i++) {
-    let bombTotal = 0
-    const leftEdge = (i % row === 0)
-    const rightEdge = (i % row === row - 1)
+function populateNums() {
+for (i = 0; i < newCellArray.length; i++) {
+  let bombTotal = 0
+  const leftEdge = (i % row === 0)
+  const rightEdge = (i % row === row - 1)
 
-    if (newCellArray[i].className === 'safe') {
-      // bomb to the left
-      if (i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
-      // bomb to the right
-      if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
-      // top right corner bomb
-      if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
-      // bomb to top left corner 
-      if (i > 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
-      // bomb to the top 
-      if (i > 10 && newCellArray[i - row].className === 'bomb') bombTotal++
-      // bomb directly underneath
-      if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
-      // bomb to bottom right corner
-      if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
-      // bomb to the bottom left corner
-      if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
-      newCellArray[i].setAttribute('bombTotal', bombTotal)
+  if (newCellArray[i].className === 'safe') {
+    // bomb to the left
+    if (i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
+    // bomb to the right
+    if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
+    // top right corner bomb
+    if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
+    // bomb to top left corner 
+    if (i > 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
+    // bomb to the top 
+    if (i > 10 && newCellArray[i - row].className === 'bomb') bombTotal++
+    // bomb directly underneath
+    if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
+    // bomb to bottom right corner
+    if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
+    // bomb to the bottom left corner
+    if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
+    newCellArray[i].setAttribute('bombTotal', bombTotal)
     }
   }
 }
