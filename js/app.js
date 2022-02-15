@@ -75,36 +75,35 @@ function createBoardCells(randBoardArray) {
 }
 
 function populateNums() {
-for (i = 0; i < newCellArray.length; i++) {
-  let bombTotal = 0
-  const leftEdge = (i % row === 0)
-  const rightEdge = (i % row === row - 1)
-
-  if (newCellArray[i].className === 'safe') {
-    // bomb to the left
-    if (i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
-    // bomb to the right
-    if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
-    // top right corner bomb
-    if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
-    // bomb to top left corner 
-    if (i > 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
-    // bomb to the top 
-    if (i > 10 && newCellArray[i - row].className === 'bomb') bombTotal++
-    // bomb directly underneath
-    if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
-    // bomb to bottom right corner
-    if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
-    // bomb to the bottom left corner
-    if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
-    newCellArray[i].setAttribute('bombTotal', bombTotal)
+  for (i = 0; i < newCellArray.length; i++) {
+    let bombTotal = 0
+    const leftEdge = (i % row === 0)
+    const rightEdge = (i % row === row - 1)
+    if (newCellArray[i].className === 'safe') {
+      // bomb to the left
+      if (i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
+      // bomb to the right
+      if (i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
+      // top right corner bomb
+      if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
+      // bomb to top left corner 
+      if (i > 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
+      // bomb to the top 
+      if (i > 10 && newCellArray[i - row].className === 'bomb') bombTotal++
+      // bomb directly underneath
+      if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
+      // bomb to bottom right corner
+      if (i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
+      // bomb to the bottom left corner
+      if (i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
+      newCellArray[i].setAttribute('bombTotal', bombTotal)
     }
   }
 }
 
 function handleClick(newCellArray, newCell) {
-  let index = parseInt(newCellArray.target.id)
-  console.log(typeof(index), index)
+  // let index = parseInt(newCellArray.target.id)
+  // console.log(typeof(index), index)
   // console.log(newCellArray.target.id)
   // if(newCellArray.target.className == 'flag') return
   if(isWinner == false) return
@@ -177,8 +176,7 @@ function rightClick(newCellArray) {
     newCellArray.target.classList.add('clicked')
     // console.log(newCellArray.target.classList)
   } else if (numFlags == 0) {
-    hasWon()
-    return
+      return
   }
   console.log(numFlags)
 }
@@ -191,6 +189,19 @@ function renderAllBombs() {
     element.innerHTML = '💣 '
     }
   })
+}
+
+function hasWon() {
+  for (let i = 0; i < newCellArray.length; i++) {
+    let safe = 0
+    if (newCellArray[i].classList.contains('safe') && newCellArray[i].classList.contains('clicked')) {
+      safe++
+    }
+  }
+  if(safe == 80) {
+    isWinner = true
+    statusMessage.innerText = 'You WON!'
+  }
 }
 
 // function cascadeEmptyCells(newCellArray, index) {
@@ -230,21 +241,6 @@ function renderAllBombs() {
 //   newCellArray
 //   if(newCellArray.classList.contains('safe') = 'safe')
 // }
-
-
-function hasWon() {
-  let correctFlag = 0
-  for(i = 0; i < newCellArray.length; i++) {
-    if(newCellArray[i].className == 'bomb' && newCellArray[i].className == 'flag')
-    correctFlag++
-  }
-  if(correctFlag === numBomb) {
-    isWinner = true
-    console.log('win')
-  }
-  return isWinner
-}
-
 
 // ! DID NOT WORK 
 // function randomArray() {

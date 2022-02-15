@@ -18,12 +18,15 @@ body {
   width: 400px;
   display: flex;
   flex-wrap: wrap;
-  background-color:antiquewhite;
+  background-color:rgb(104, 212, 187);
 }
 
 .board > div {
   height: 40px;
   width: 40px;
+  border: 2px solid;
+  border-color: #0cdf0c #78122c #0f21c4 #6c6231;
+  box-sizing: border-box;
 }
 
 #reset {
