@@ -87,9 +87,9 @@ function populateNums() {
       // top right corner bomb
       if (i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
       // bomb to top left corner 
-      if (i > 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
+      if (i >= 11 && leftEdge === false && newCellArray[i - 1 - row].className === 'bomb') bombTotal++
       // bomb to the top 
-      if (i > 10 && newCellArray[i - row].className === 'bomb') bombTotal++
+      if (i >= 10 && newCellArray[i - row].className === 'bomb') bombTotal++
       // bomb directly underneath
       if (i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
       // bomb to bottom right corner
@@ -115,7 +115,7 @@ function handleClick(newCellArray, newCell) {
     if (adjBombs == 0) {
       // console.log(adjBombs)
       newCellArray.target.classList.add('clicked')
-      cascadeEmptyCells(newCellArray, index)
+      // cascadeEmptyCells(newCellArray, index)
     }
     if (adjBombs > 0) {
       newCellArray.target.classList.add('clicked')
@@ -146,6 +146,7 @@ function handleClick(newCellArray, newCell) {
       newCellArray.target.innerHTML = adjBombs
     }
   }
+  console.log(newCellArray.target)
   hasWon()
 }
 
@@ -174,7 +175,7 @@ function rightClick(newCellArray) {
     numFlags--
     newCellArray.target.innerHTML = '🚩'
     newCellArray.target.classList.add('clicked')
-    // console.log(newCellArray.target.classList)
+    console.log(newCellArray.target.classList)
   } else if (numFlags == 0) {
       return
   }
@@ -192,32 +193,22 @@ function renderAllBombs() {
 }
 
 function hasWon() {
+  let safe = 0
   for (let i = 0; i < newCellArray.length; i++) {
-    let safe = 0
+    
     if (newCellArray[i].classList.contains('safe') && newCellArray[i].classList.contains('clicked')) {
       safe++
     }
   }
+  // console.log(safe)
   if(safe == 80) {
     isWinner = true
     statusMessage.innerText = 'You WON!'
+    console.log('You won')
   }
 }
 
-// function cascadeEmptyCells(newCellArray, index) {
-//   const leftEdge = (i % row === 0)
-//   const rightEdge = (i % row === row - 1)
-//   const index = parseInt(newCellArray.target.id) - 1
-//   console.log(index)
-//   if(index > 0 && leftEdge != 0) {
-//     const newIndex = newCellArray.target.id
-//     const leftCell = document.getElementById(newIndex)
-//     handleClick(leftCell)
-//     console.log('index', index)
-//     console.log('newIndex', newIndex)
-//     console.log(leftCell)
-//   }
-// }
+
 
 
 // function cascadeEmptyCells() {
@@ -234,6 +225,23 @@ function hasWon() {
 //     if (newCellArray[i].classList.contains('safe')) {
 //       if(i < 89 && newCellArray[i + row].className === 'safe') cascadeEmptyCells(newCellArray)
 //     }
+//   }
+// }
+
+
+
+// function cascadeEmptyCells(newCellArray, index) {
+//   const leftEdge = (i % row === 0)
+//   const rightEdge = (i % row === row - 1)
+//   const index = parseInt(newCellArray.target.id) - 1
+//   console.log(index)
+//   if(index > 0 && leftEdge != 0) {
+//     const newIndex = newCellArray.target.id
+//     const leftCell = document.getElementById(newIndex)
+//     handleClick(leftCell)
+//     console.log('index', index)
+//     console.log('newIndex', newIndex)
+//     console.log(leftCell)
 //   }
 // }
 

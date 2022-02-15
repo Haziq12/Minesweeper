@@ -3,14 +3,13 @@ html {
 }
 
 body {
-  background-color: aqua;
+  /* background-color: rgb(109, 210, 210); */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: gray;
-  min-height: 100vh;
+  background-color: rgb(150, 85, 85);
 }
 
 .board {  
@@ -24,30 +23,63 @@ body {
 .board > div {
   height: 40px;
   width: 40px;
-  border: 2px solid;
-  border-color: #0cdf0c #78122c #0f21c4 #6c6231;
+  border: 1px;
+  border-style: inset;
+  border-color: rgb(181, 24, 24);
   box-sizing: border-box;
+  /* transition: all 9.5s; */
 }
 
-#reset {
-  margin-top: 30px;
+#reset{
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#560f0f;
+  text-align:center;
+  transition: all 0.2s;
+  margin-top: 20px;
 }
+
+  /* @media all and (max-width:30em){
+   a.button1{
+    display:block;
+    margin:0.4em auto;
+   }
+  } */
 
 .bomb {
-  background-color:coral;
-  
+  background-color:rgb(250, 134, 92);
+  display: flex;
+  justify-content: center;
 }
 
 .clicked {
   background-color: aqua;
+  text-align: center;
 }
 
-.clicked-zero {
+/* .clicked-zero {
   background-color: khaki;
-}
+} */
 
 .flag {
   text-align: center;
   background-color:chocolate;
 }
 
+h1 {
+  font-size: 40px;
+  font-family:sans-serif;
+
+}
+
+h3 {
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+}
