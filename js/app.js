@@ -103,9 +103,9 @@ function populateNums() {
       // bomb to the top 
       if(i >= 10 && newCellArray[i - row].className === 'bomb') bombTotal++
       // bomb directly underneath
-      if(i < 89 && newCellArray[i + row].className === 'bomb') bombTotal++
+      if(i <= 89 && newCellArray[i + row].className === 'bomb') bombTotal++
       // bomb to bottom right corner
-      if(i < 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
+      if(i <= 88 && rightEdge === false && newCellArray[i + 1 + row].className === 'bomb') bombTotal++
       // bomb to the bottom left corner
       if(i < 90 && leftEdge === false && newCellArray[i - 1 + row].className === 'bomb') bombTotal++
       newCellArray[i].setAttribute('bombTotal', bombTotal)
