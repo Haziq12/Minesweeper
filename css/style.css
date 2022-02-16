@@ -54,7 +54,7 @@ body {
   } */
 
 .bomb {
-  background-color:rgb(250, 134, 92);
+  /* background-color:rgb(250, 134, 92); */
   display: flex;
   justify-content: center;
 }
