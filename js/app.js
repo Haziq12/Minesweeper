@@ -23,9 +23,20 @@ const statusMessage = document.getElementById('message')
 
 const resetButton = document.getElementById('reset')
 
+const flags = document.getElementById('flags')
+
 /*----------------------------- Event Listeners -----------------------------*/
 
-
+resetButton.addEventListener('click', () => {
+  boardCells.innerHTML = ''
+  boardArray = []
+  nonBombArray = []
+  bombArray = []
+  newCellArray = []
+  init()
+  // newCell.addEventListener('click', handleClick)
+  // newCell.addEventListener('contextmenu', rightClick) 
+})
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -38,6 +49,7 @@ function init() {
   row = 10
   isWinner = null
   numBomb = 20
+
   numFlags = numBomb
 
   statusMessage.innerText = 'Choose cells'
@@ -83,7 +95,7 @@ function populateNums() {
       // bomb to the left
       if(i > 0 && leftEdge === false && newCellArray[i - 1].className === 'bomb') bombTotal++
       // bomb to the right
-      if(i < 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
+      if(i <= 98 && rightEdge === false && newCellArray[i + 1].className === 'bomb') bombTotal++
       // top right corner bomb
       if(i > 9 && rightEdge === false && newCellArray[i + 1 - row].className === 'bomb') bombTotal++
       // bomb to top left corner 
@@ -178,12 +190,12 @@ function rightClick(newCellArray) {
   } else if (numFlags == 0) {
       return
   }
-  console.log(numFlags)
+  flags.innerText = `🚩 Flags left : ${numFlags}`
 }
 
 function renderAllBombs() {
   isWinner = false
-  statusMessage.innerText = 'You Lost'
+  statusMessage.innerText = 'You Lost 😣'
   newCellArray.forEach(element => {
     if(element.classList == 'bomb') {
     element.innerHTML = '💣 '
@@ -202,11 +214,9 @@ function hasWon() {
   // console.log(safe)
   if(safe == 80) {
     isWinner = true
-    statusMessage.innerText = 'You WON!'
-    console.log('You won')
+    statusMessage.innerText = 'You WON! 🎉🎉🎉🎉'
   }
 }
-
 
 
 
@@ -221,7 +231,7 @@ function cascadeEmptyCells(cell, i) {
   // bomb to the left
   if(i > 0 && leftEdge === false ) neighborCells.push(newCellArray[i - 1])
   // bomb to the right
-  if(i < 98 && rightEdge === false) neighborCells.push(newCellArray[i + 1])
+  if(i <= 98 && rightEdge === false) neighborCells.push(newCellArray[i + 1])
   // top right corner bomb
   if(i > 9 && rightEdge === false) neighborCells.push(newCellArray[i + 1 - row])
   // bomb to top left corner 
@@ -269,6 +279,13 @@ function cascadeEmptyCells(cell, i) {
         neighborCell.innerHTML = bombTotal
       }
   })
+
+
+  // function reset() {
+  //   init()
+  // }
+
+
 
   // console.log('hi')
   // for (let i = 0; i < newCellArray.length; i++) {

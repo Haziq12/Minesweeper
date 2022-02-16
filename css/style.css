@@ -31,17 +31,17 @@ body {
 }
 
 #reset{
-  display:inline-block;
+  /* display:inline-block; */
   padding:0.35em 1.2em;
   border:0.1em solid #FFFFFF;
   margin:0 0.3em 0.3em 0;
   border-radius:0.12em;
   box-sizing: border-box;
-  text-decoration:wavy;
+  /* text-decoration:wavy; */
   font-family:'Roboto',sans-serif;
-  font-weight:500;
-  color:#4e0606;
-  text-align:center;
+  /* font-weight:500; */
+  /* color:#4e0606; */
+  /* text-align:center; */
   transition: all 0.2s;
   margin-top: 20px;
 }
@@ -53,8 +53,12 @@ body {
    }
   } */
 
+.board > div:hover{
+  background-color:chartreuse;
+}
+
 .bomb {
-  /* background-color:rgb(250, 134, 92); */
+  background-color:rgb(250, 134, 92);
   display: flex;
   justify-content: center;
 }
@@ -62,6 +66,7 @@ body {
 .clicked {
   background-color: aqua;
   text-align: center;
+  transition:.5s;
 }
 
 /* .clicked-zero {
@@ -82,6 +87,10 @@ h1 {
 h3 {
   font-size: 30px;
   font-family: 'Courier New', Courier, monospace;
+}
+
+h4 {
+  font-size: 20px;
 }
 
 
