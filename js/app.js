@@ -33,9 +33,8 @@ resetButton.addEventListener('click', () => {
   nonBombArray = []
   bombArray = []
   newCellArray = []
+  flags.innerText = `🚩 Flags left : 20`
   init()
-  // newCell.addEventListener('click', handleClick)
-  // newCell.addEventListener('contextmenu', rightClick) 
 })
 
 
@@ -69,11 +68,11 @@ function init() {
   boardArray = nonBombArray.concat(bombArray)
   let randBoardArray = boardArray.sort(() => Math.random() - 0.5)
 
-  createBoardCells(randBoardArray)
+  renderBoardCells(randBoardArray)
 }
 
 // this function creates the board with 10x10 cells
-function createBoardCells(randBoardArray) {
+function renderBoardCells(randBoardArray) {
   for (i = 0; i < column * row; i++) {
     const newCell = document.createElement("div")
     newCell.setAttribute("id", i);
@@ -115,7 +114,7 @@ function populateNums() {
 
 function handleClick(newCellArray, newCell) {
   let index = parseInt(newCellArray.target.id)
-  console.log(typeof(index), index)
+  // console.log(typeof(index), index)
   // console.log(newCellArray.target.id)
   // if(newCellArray.target.className == 'flag') return
   if(isWinner == false) return
@@ -157,7 +156,7 @@ function handleClick(newCellArray, newCell) {
       newCellArray.target.innerHTML = adjBombs
     }
   }
-  console.log(newCellArray.target)
+  // console.log(newCellArray.target)
   hasWon()
 }
 
@@ -186,7 +185,7 @@ function rightClick(newCellArray) {
     numFlags--
     newCellArray.target.innerHTML = '🚩'
     newCellArray.target.classList.add('clicked')
-    console.log(newCellArray.target.classList)
+    // console.log(newCellArray.target.classList)
   } else if (numFlags == 0) {
       return
   }
@@ -223,8 +222,8 @@ function hasWon() {
 function cascadeEmptyCells(cell, i) {
   if(cell.classList.contains('clicked')) return
   cell.classList.add('clicked')
-  console.log(cell)
-  console.log(i)
+  // console.log(cell)
+  // console.log(i)
   const leftEdge = (i % row === 0)
   const rightEdge = (i % row === row - 1)
   const neighborCells = []
@@ -244,10 +243,10 @@ function cascadeEmptyCells(cell, i) {
   if(i < 88 && rightEdge === false) neighborCells.push(newCellArray[i + 1 + row])
   // bomb to the bottom left corner
   if(i < 90 && leftEdge === false) neighborCells.push(newCellArray[i - 1 + row])
-  console.log(neighborCells)
+  // console.log(neighborCells)
   neighborCells.forEach(neighborCell => {
     const bombTotal = neighborCell.getAttribute('bombtotal')
-    console.log(parseInt(neighborCell.id))
+    // console.log(parseInt(neighborCell.id))
     if(bombTotal === '0') {
       cascadeEmptyCells(neighborCell, parseInt(neighborCell.id))
     } else {
