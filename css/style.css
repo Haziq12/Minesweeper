@@ -24,9 +24,12 @@ body {
   height: 40px;
   width: 40px;
   border: 1px;
+  display: flex;
   border-style: inset;
   border-color: rgb(181, 24, 24);
   box-sizing: border-box;
+  font-size: 20px;
+  font-weight: bold;
   /* transition: all 9.5s; */
 }
 
@@ -58,14 +61,14 @@ body {
 }
 
 .bomb {
-  background-color:rgb(250, 134, 92);
+  /* background-color:rgb(250, 134, 92); */
   display: flex;
   justify-content: center;
 }
 
 .clicked {
   background-color: aqua;
-  text-align: center;
+  justify-content: center;
   transition:.5s;
 }
 
@@ -75,7 +78,7 @@ body {
 
 .flag {
   text-align: center;
-  background-color:chocolate;
+  background-color:beige;
 }
 
 h1 {
