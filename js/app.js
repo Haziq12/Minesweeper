@@ -25,6 +25,10 @@ const resetButton = document.getElementById('reset')
 
 const flags = document.getElementById('flags')
 
+const music = document.getElementById('music')
+
+const bombSound = document.getElementById('bomb-hit')
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 resetButton.addEventListener('click', () => {
@@ -48,8 +52,8 @@ function init() {
   row = 10
   isWinner = null
   numBomb = 20
-
   numFlags = numBomb
+  music.volume = .1
 
   statusMessage.innerText = 'Choose cells'
 
@@ -193,6 +197,9 @@ function rightClick(newCellArray) {
 }
 
 function renderAllBombs() {
+  music.volume = 0
+  bombSound.volume = .4
+  bombSound.play()
   isWinner = false
   statusMessage.innerText = 'You Lost 😣'
   newCellArray.forEach(element => {
@@ -278,6 +285,7 @@ function cascadeEmptyCells(cell, i) {
         neighborCell.innerHTML = bombTotal
       }
   })
+
 
 
   // function reset() {
