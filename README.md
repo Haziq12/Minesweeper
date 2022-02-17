@@ -1,4 +1,4 @@
-# Minesweeper !
+# **Minesweeper** !
 
 ![Game Screenshot](https://i.imgur.com/i5MtOxw.png)
 
@@ -15,7 +15,12 @@ Minesweeper is a single player logic-based game where a player chooses squares o
 ### Icebox 🧊 ⛏️
 - Let user choose rows, columns, and number of bombs
 - Add timer
-  
+***
+### Credits
+
+The sound effect and music can be found at 
+
+<a href="https://www.youtube.com/audiolibrary?feature=blog" target="_blank">YouTube Audio Library</a>
 
 
-
+[YouTube Audio Library](https://www.youtube.com/audiolibrary?feature=blog)
