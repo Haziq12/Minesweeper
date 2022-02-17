@@ -2,7 +2,7 @@
 
 ![Game Screenshot](https://i.imgur.com/i5MtOxw.png)
 
-[Play Minesweeper Here!](https://haziq12.github.io/Minesweeper/)
+### **[Play Minesweeper Here!](https://haziq12.github.io/Minesweeper/)**
 
 ***
 Minesweeper is a single player logic-based game where a player chooses squares on the board that will reveal either a number or a mine. If a number is revealed it will represent the amount of adjacent mines to the clicked square. The player wins if all the squares without mines are uncovered and loses if the player reveals a square with a mine. Clicking on a square with no adjacent mines will reveal all the adjacent empty cells. 
@@ -18,9 +18,4 @@ Minesweeper is a single player logic-based game where a player chooses squares o
 ***
 ### Credits
 
-The sound effect and music can be found at 
-
-<a href="https://www.youtube.com/audiolibrary?feature=blog" target="_blank">YouTube Audio Library</a>
-
-
-[YouTube Audio Library](https://www.youtube.com/audiolibrary?feature=blog)
+The sound effect and music can be found at [YouTube Audio Library](https://www.youtube.com/audiolibrary?feature=blog)
