@@ -116,7 +116,7 @@ function handleClick(newCellArray, newCell) {
   let index = parseInt(newCellArray.target.id)
   // console.log(typeof(index), index)
   // console.log(newCellArray.target.id)
-  // if(newCellArray.target.className == 'flag') return
+  if(newCellArray.target.classList.contains('flag')) return
   if(isWinner == false) return
   if(isWinner == true) return
   if (newCellArray.target.classList.contains('bomb')) {
@@ -181,11 +181,11 @@ function rightClick(newCellArray) {
   else if (newCellArray.target.className !== 'clicked' && newCellArray.target.className !== 'flag' && numFlags > 0) {
     newCellArray.preventDefault()
     newCellArray.target.classList.add('flag')
-    console.log(newCellArray.target.classList.contains('flag'))
+    // console.log(newCellArray.target.classList.contains('flag'))
     numFlags--
     newCellArray.target.innerHTML = '🚩'
     newCellArray.target.classList.add('clicked')
-    // console.log(newCellArray.target.classList)
+    console.log(newCellArray.target.classList)
   } else if (numFlags == 0) {
       return
   }
