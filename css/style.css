@@ -3,7 +3,6 @@ html {
 }
 
 body {
-  /* background-color: rgb(109, 210, 210); */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,7 +16,7 @@ body {
   width: 400px;
   display: flex;
   flex-wrap: wrap;
-  background-color:gray;
+  /* background-color:gray; */
 }
 
 .board > div {
@@ -26,11 +25,11 @@ body {
   border: 1px;
   display: flex;
   border-style: inset;
-  border-color: black;
+  border-color:black;
   box-sizing: border-box;
   font-size: 20px;
   font-weight: bold;
-  /* transition: all 9.5s; */
+  border-radius: 5px;
 }
 
 #reset{
@@ -38,39 +37,29 @@ body {
   border:0.1em solid #FFFFFF;
   margin:0 0.3em 0.3em 0;
   border-radius:0.12em;
-  box-sizing: border-box;
   font-family:'Roboto',sans-serif;
   transition: all 0.2s;
-  margin-top: 20px;
+  margin-top: 40px;
 }
-
-  /* @media all and (max-width:30em){
-   a.button1{
-    display:block;
-    margin:0.4em auto;
-   }
-  } */
 
 .board > div:hover{
   background-color:red;
 }
 
 .bomb {
-  /* background-color:rgb(250, 134, 92); */
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .clicked {
-  background-color: black;
+  background-color:rgb(0, 0, 0);
+  display:flex;
   justify-content: center;
+  align-items: center;
   transition:.5s;
   color:white;
 }
-
-/* .clicked-zero {
-  background-color: khaki;
-} */
 
 .flag {
   text-align: center;
@@ -107,3 +96,9 @@ h4 {
 #music {
   margin-top: 40px;
 }
+
+  @media all and (max-width:600px){
+    h1 {
+      font-size: 60px;
+    }
+  }

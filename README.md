@@ -14,8 +14,9 @@ Minesweeper is a single player logic-based game where a player chooses squares o
 - git
 ***
 ### Icebox 🧊 ⛏️
-- Let users choose rows, columns, and number of bombs
-- 
+- Let user choose rows, columns, and number of bombs
+- Add timer
+  
 
 
 

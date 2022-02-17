@@ -45,6 +45,7 @@ resetButton.addEventListener('click', () => {
 /*-------------------------------- Functions --------------------------------*/
 
 init()
+music.volume = .1
 
 
 function init() {
@@ -54,8 +55,6 @@ function init() {
   isWinner = null
   numBomb = 20
   numFlags = numBomb
-  music.volume = .1
-  music.play()
 
   statusMessage.innerText = 'Choose cells'
 
@@ -70,7 +69,7 @@ function init() {
   }
 
   // merge bombArray with nonBombArray to get full board array
-  // find out how to radomize array contents 
+  // radomize array contents 
   boardArray = nonBombArray.concat(bombArray)
   let randBoardArray = boardArray.sort(() => Math.random() - 0.5)
 
@@ -120,8 +119,6 @@ function populateNums() {
 
 function handleClick(newCellArray, newCell) {
   let index = parseInt(newCellArray.target.id)
-  // console.log(typeof(index), index)
-  // console.log(newCellArray.target.id)
   if(newCellArray.target.classList.contains('flag')) return
   if(isWinner == false) return
   if(isWinner == true) return
@@ -130,7 +127,6 @@ function handleClick(newCellArray, newCell) {
   } else {
     let adjBombs = newCellArray.target.getAttribute('bombTotal')
     if (adjBombs == 0) {
-      // newCellArray.target.classList.add('clicked')
       cascadeEmptyCells(newCellArray.target, index)
     }
     if (adjBombs > 0) {
@@ -162,7 +158,6 @@ function handleClick(newCellArray, newCell) {
       newCellArray.target.innerHTML = adjBombs
     }
   }
-  // console.log(newCellArray.target)
   hasWon()
 }
 
@@ -187,7 +182,6 @@ function rightClick(newCellArray) {
   else if (newCellArray.target.className !== 'clicked' && newCellArray.target.className !== 'flag' && numFlags > 0) {
     newCellArray.preventDefault()
     newCellArray.target.classList.add('flag')
-    // console.log(newCellArray.target.classList.contains('flag'))
     numFlags--
     newCellArray.target.innerHTML = '🚩'
     newCellArray.target.classList.add('clicked')
@@ -206,7 +200,7 @@ function renderAllBombs() {
   statusMessage.innerText = 'You Lost 😣'
   newCellArray.forEach(element => {
     if(element.classList == 'bomb') {
-    element.innerHTML = '💣 '
+    element.innerHTML = '💣 ' 
     }
   })
 }
@@ -219,7 +213,6 @@ function hasWon() {
       safe++
     }
   }
-  // console.log(safe)
   if(safe == 80) {
     isWinner = true
     statusMessage.innerText = 'You WON! 🎉🎉🎉🎉'
@@ -231,8 +224,6 @@ function hasWon() {
 function cascadeEmptyCells(cell, i) {
   if(cell.classList.contains('clicked')) return
   cell.classList.add('clicked')
-  // console.log(cell)
-  // console.log(i)
   const leftEdge = (i % row === 0)
   const rightEdge = (i % row === row - 1)
   const neighborCells = []
@@ -252,10 +243,8 @@ function cascadeEmptyCells(cell, i) {
   if(i < 88 && rightEdge === false) neighborCells.push(newCellArray[i + 1 + row])
   // bomb to the bottom left corner
   if(i < 90 && leftEdge === false) neighborCells.push(newCellArray[i - 1 + row])
-  // console.log(neighborCells)
   neighborCells.forEach(neighborCell => {
     const bombTotal = neighborCell.getAttribute('bombtotal')
-    // console.log(parseInt(neighborCell.id))
     if(bombTotal === '0') {
       cascadeEmptyCells(neighborCell, parseInt(neighborCell.id))
     } else {
@@ -287,61 +276,4 @@ function cascadeEmptyCells(cell, i) {
         neighborCell.innerHTML = bombTotal
       }
   })
-
-
-
-  // function reset() {
-  //   init()
-  // }
-
-
-
-  // console.log('hi')
-  // for (let i = 0; i < newCellArray.length; i++) {
-  //   console.log('BEFORE ADD CLASS', newCellArray[i])
-  //   newCellArray[i].classList.add('zero')
-  //   newCellArray[i].classList.add('clicked-zero')
-  //   console.log(newCellArray[i], 'AFTER ADD CLASS')
-  //   console.log(newCellArray.classList)
-  //   if (newCellArray[i].classList.contains('safe')) {
-  //     if(i < 89 && newCellArray[i + row].className === 'safe') cascadeEmptyCells(newCellArray)
-  //   }
-  // }
 }
-
-
-
-// function cascadeEmptyCells(newCellArray, index) {
-//   const leftEdge = (i % row === 0)
-//   const rightEdge = (i % row === row - 1)
-//   const index = parseInt(newCellArray.target.id) - 1
-//   console.log(index)
-//   if(index > 0 && leftEdge != 0) {
-//     const newIndex = newCellArray.target.id
-//     const leftCell = document.getElementById(newIndex)
-//     handleClick(leftCell)
-//     console.log('index', index)
-//     console.log('newIndex', newIndex)
-//     console.log(leftCell)
-//   }
-// }
-
-// function render() {
-//   newCellArray
-//   if(newCellArray.classList.contains('safe') = 'safe')
-// }
-
-// ! DID NOT WORK 
-// function randomArray() {
-//   let currentIndex = boardArray.length - 1
-//   let randBoardArray = []
-//   console.log(randBoardArray[2])
-//   while(currentIndex != 0) {
-//     if(randBoardArray[currentIndex] === undefined) {
-//       let randPick = Math.floor(Math.random() * boardArray.length-1)
-//       randBoardArray[currentIndex] = boardArray[randPick]
-//     }
-//   }
-//   console.log(randBoardArray)
-// }
-// randomArray()
