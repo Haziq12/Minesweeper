@@ -46,6 +46,7 @@ resetButton.addEventListener('click', () => {
 
 init()
 
+
 function init() {
 
   column = 10
@@ -54,6 +55,7 @@ function init() {
   numBomb = 20
   numFlags = numBomb
   music.volume = .1
+  music.play()
 
   statusMessage.innerText = 'Choose cells'
 
@@ -197,7 +199,7 @@ function rightClick(newCellArray) {
 }
 
 function renderAllBombs() {
-  music.volume = 0
+  music.pause()
   bombSound.volume = .4
   bombSound.play()
   isWinner = false
