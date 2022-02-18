@@ -1,6 +1,6 @@
 # **Minesweeper** 
 
-![Game Screenshot](https://i.imgur.com/i5MtOxw.png)
+![Game Screenshot](https://i.imgur.com/IvDG3tf.png?1)
 
 ### **[Play Minesweeper Here!](https://haziq12.github.io/Minesweeper/)**
 
