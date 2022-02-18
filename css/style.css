@@ -16,7 +16,6 @@ body {
   width: 400px;
   display: flex;
   flex-wrap: wrap;
-  /* background-color:gray; */
 }
 
 .board > div {
@@ -32,17 +31,18 @@ body {
   border-radius: 5px;
 }
 
-#reset{
-  padding:0.35em 1.2em;
+#reset {
+  padding:10px 25px;
   border:0.1em solid #FFFFFF;
   margin:0 0.3em 0.3em 0;
   border-radius:0.12em;
   font-family:'Roboto',sans-serif;
+  font-size: 15px;
   transition: all 0.2s;
   margin-top: 40px;
 }
 
-.board > div:hover{
+.board > div:hover {
   background-color:red;
 }
 
@@ -97,7 +97,7 @@ h4 {
   margin-top: 40px;
 }
 
-  @media all and (max-width:600px){
+  @media all and (max-width:600px) {
     h1 {
       font-size: 60px;
     }

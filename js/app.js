@@ -1,9 +1,3 @@
-/*-------------------------------- Constants --------------------------------*/
-
-
-
-/*---------------------------- Variables (state) ----------------------------*/
-
 let column
 let row
 let boardArray = []
@@ -14,22 +8,12 @@ let numFlags
 let isWinner
 let newCellArray = []
 
-
-/*------------------------ Cached Element References ------------------------*/
-
 const boardCells = document.querySelector('.board')
-
 const statusMessage = document.getElementById('message')
-
 const resetButton = document.getElementById('reset')
-
 const flags = document.getElementById('flags')
-
 const music = document.getElementById('music')
-
 const bombSound = document.getElementById('bomb-hit')
-
-/*----------------------------- Event Listeners -----------------------------*/
 
 resetButton.addEventListener('click', () => {
   boardCells.innerHTML = ''
@@ -41,12 +25,7 @@ resetButton.addEventListener('click', () => {
   init()
 })
 
-
-/*-------------------------------- Functions --------------------------------*/
-
 init()
-music.volume = .1
-
 
 function init() {
 
@@ -55,6 +34,7 @@ function init() {
   isWinner = null
   numBomb = 20
   numFlags = numBomb
+  music.volume = .1
 
   statusMessage.innerText = 'Choose cells'
 
@@ -117,7 +97,7 @@ function populateNums() {
   }
 }
 
-function handleClick(newCellArray, newCell) {
+function handleClick(newCellArray) {
   let index = parseInt(newCellArray.target.id)
   if(newCellArray.target.classList.contains('flag')) return
   if(isWinner == false) return
@@ -160,8 +140,6 @@ function handleClick(newCellArray, newCell) {
   }
   hasWon()
 }
-
-
 
 function rightClick(newCellArray) {
   if (isWinner == false) return
@@ -208,7 +186,6 @@ function renderAllBombs() {
 function hasWon() {
   let safe = 0
   for (let i = 0; i < newCellArray.length; i++) {
-    
     if (newCellArray[i].classList.contains('safe') && newCellArray[i].classList.contains('clicked')) {
       safe++
     }
@@ -218,8 +195,6 @@ function hasWon() {
     statusMessage.innerText = 'You WON! 🎉🎉🎉🎉'
   }
 }
-
-
 
 function cascadeEmptyCells(cell, i) {
   if(cell.classList.contains('clicked')) return
